@@ -1,0 +1,294 @@
+/* Seleciona todos os elementos na página */
+* {
+  box-sizing: border-box; /* Inclui bordas e padding no cálculo de largura/altura */
+  margin: 0; /* Remove a margem padrão de todos os elementos */
+  padding: 0; /* Remove o padding padrão de todos os elementos */
+}
+
+html, body {
+  width: 100%; /* Ocupa 100% da largura da janela */
+  min-height: 100vh; /* Garante altura mínima igual à altura da janela */
+  background-color: #141414; /* Define a cor de fundo escura da página */
+  color: #fff; /* Define a cor de texto padrão como branco */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Define a família de fontes */
+  overflow-x: hidden; /* Evita rolagem horizontal indesejada */
+}
+
+body {
+  display: flex; /* Usa flexbox para centralizar o conteúdo */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+}
+
+main {
+  text-align: center; /* Centraliza o texto no container principal */
+  width: 100%; /* Mantém o main com 100% da largura disponível */
+  max-width: 1200px; /* Limita a largura máxima do conteúdo */
+  padding: 0 4%; /* Adiciona espaçamento horizontal nas laterais */
+}
+
+header {
+  position: static; /* Mantém o fluxo normal do cabeçalho */
+}
+
+.theme-toggle {
+  position: fixed; /* Posiciona o botão no canto da janela */
+  bottom: 1rem; /* Distância do rodapé da página */
+  right: 1rem; /* Distância da borda direita da página */
+  width: 2.8rem;
+  height: 2.8rem;
+  padding: 0;
+  border: 1px solid #808080;
+  border-radius: 50%;
+  background-color: #2c2c2c;
+  cursor: pointer;
+  z-index: 10; /* Garantir que fique acima do conteúdo */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.theme-toggle::before {
+  content: '☀️';
+}
+
+.theme-toggle.active {
+  background-color: #f6f6f6;
+  border-color: #808080;
+  color: #141414;
+}
+
+.theme-toggle.active::before {
+  content: '🌙';
+}
+
+.theme-toggle:hover {
+  border-color: #fff;
+}
+
+header h1 {
+  font-size: 3.5vw; /* Ajusta o tamanho do título proporcional à largura da viewport */
+  font-weight: 400; /* Define peso de fonte normal */
+  color: #fff; /* Garante que o título seja branco */
+  margin-bottom: 2em; /* Cria espaço abaixo do título */
+}
+
+@media (min-width: 1000px) {
+  header h1 {
+    font-size: 3.5rem; /* Usa tamanho fixo maior em telas grandes */
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    align-items: flex-start; /* Permite que o conteúdo comece no topo em telas menores */
+    padding: 2rem 0; /* Espaço extra acima e abaixo no corpo */
+  }
+
+  main {
+    padding: 0 5%; /* Aumenta o espaçamento lateral em telas menores */
+  }
+
+  header h1 {
+    font-size: 8vw; /* Ajusta o título para dispositivos médios e pequenos */
+    margin-bottom: 1.5em;
+  }
+
+  .profiles {
+    gap: 1.5rem; /* Espaçamento maior entre cards em dispositivos menores */
+  }
+
+  .profile {
+    width: 42vw; /* Ocupa parte da largura disponível em dispositivos menores */
+    min-width: 140px; /* Mantém largura mínima legível */
+    max-width: 180px; /* Limita a largura máxima para cada card */
+  }
+
+  .profile-name {
+    font-size: 4vw; /* Ajusta o tamanho do nome em telas menores */
+  }
+
+  .btn-manage {
+    padding: 0.8em 2rem; /* Botão maior para toque em dispositivos pequenos */
+  }
+}
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 9vw; /* Título ainda maior proporcionalmente em celulares */
+  }
+
+  .profiles {
+    gap: 1rem; /* Gap reduzido para melhor uso de espaço */
+  }
+
+  .profile {
+    width: 46vw; /* Cards ocupam quase metade da largura do celular */
+    min-width: 120px; /* Legibilidade mínima mantida */
+    max-width: 160px; /* Limita largura para evitar cards muito grandes */
+  }
+
+  .profile-name {
+    font-size: 5vw; /* Nome maior em telas pequenas */
+  }
+
+  .btn-manage {
+    width: 100%; /* Botão ocupa toda a largura disponível */
+    max-width: 260px; /* Limita largura do botão em telas pequenas */
+    margin: 0 auto; /* Centraliza o botão */
+    display: inline-flex;
+    justify-content: center;
+  }
+}
+
+.profiles {
+  display: flex; /* Exibe os perfis em linha */
+  flex-wrap: wrap; /* Permite que os cards quebrem de linha em telas menores */
+  justify-content: center; /* Centraliza os perfis horizontalmente */
+  gap: 2vw; /* Espaçamento entre cada perfil */
+  list-style: none; /* Remove marcadores padrão da lista */
+  margin-bottom: 4em; /* Espaço abaixo do conjunto de perfis */
+}
+
+.profile {
+  width: 10vw; /* Define largura responsiva dos cards */
+  min-width: 84px; /* Define largura mínima para manter legibilidade */
+  max-width: 150px; /* Define largura máxima para não ficar muito largo */
+  position: relative; /* Permite posicionamento relativo interno */
+}
+
+.profile a {
+  text-decoration: none; /* Remove sublinhado do link */
+  display: flex; /* Usa flexbox para empilhar avatar e nome */
+  flex-direction: column; /* Organiza o conteúdo na vertical */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+}
+
+.avatar-wrapper {
+  width: 100%; /* Usa toda a largura do card */
+  aspect-ratio: 1 / 1; /* Mantém a caixa sempre quadrada */
+  border-radius: 4px; /* Arredonda os cantos do avatar */
+  overflow: hidden; /* Esconde conteúdo que ultrapassa o contêiner */
+  border: 3px solid transparent; /* Borda invisível inicial */
+  transition: border-color 0.2s ease; /* Anima a borda no hover */
+}
+
+.avatar-wrapper img {
+  width: 100%; /* Faz a imagem ocupar toda a largura do wrapper */
+  height: 100%; /* Faz a imagem ocupar toda a altura do wrapper */
+  object-fit: cover; /* Corta a imagem mantendo aspecto e preenchendo o contêiner */
+  display: block; /* Remove espaçamento em linha de imagens */
+}
+
+.profile-name {
+  margin-top: 0.8em; /* Adiciona espaço acima do nome */
+  font-size: 1.3vw; /* Ajusta o tamanho do texto responsivamente */
+  color: #808080; /* Define a cor inicial do nome como cinza */
+  transition: color 0.2s ease; /* Anima a cor do texto no hover */
+}
+
+@media (min-width: 1000px) {
+  .profile-name {
+    font-size: 1.3rem; /* Usa tamanho fixo em telas maiores */
+  }
+}
+
+.profile a:hover .avatar-wrapper {
+  border-color: #fff; /* Muda a borda para branco ao passar o mouse */
+}
+
+.profile a:hover .profile-name {
+  color: #fff; /* Muda a cor do nome para branco ao passar o mouse */
+}
+
+/* Ícone de cadeado */
+.lock-icon {
+  margin-top: 0.5rem; /* Espaço acima do ícone de cadeado */
+  width: 18px; /* Largura fixa do ícone */
+  height: 18px; /* Altura fixa do ícone */
+  color: #808080; /* Cor cinza do ícone */
+}
+
+.lock-icon svg {
+  width: 100%; /* Faz o SVG ocupar a largura do contêiner */
+  height: 100%; /* Faz o SVG ocupar a altura do contêiner */
+}
+
+/* Botão de Gerenciar Perfis */
+.btn-manage {
+  display: inline-block; /* Permite definir padding e borda no link */
+  background-color: transparent; /* Fundo transparente no botão */
+  border: 1px solid #808080; /* Borda cinza ao redor do botão */
+  color: #808080; /* Cor do texto do botão */
+  padding: 0.5em 1.5em; /* Espaçamento interno do botão */
+  font-size: 1.2rem; /* Tamanho da fonte do botão */
+  letter-spacing: 2px; /* Espaçamento entre letras */
+  cursor: pointer; /* Cursor de mão ao passar no botão */
+  text-decoration: none; /* Remove sublinhado do link */
+  transition: color 0.2s ease, border-color 0.2s ease; /* Anima cor e borda no hover */
+  border-radius: 0px; /* Mantém o botão com cantos retos */
+}
+
+.btn-manage:hover {
+  color: #fff; /* Muda o texto para branco no hover */
+  border-color: #fff; /* Muda a borda para branco no hover */
+}
+
+.theme-toggle {
+  margin-top: 1rem; /* Espaço acima do botão de tema */
+  padding: 0.5em 1rem; /* Espaçamento interno do botão */
+  border: 1px solid #808080; /* Borda cinza leve */
+  background-color: transparent; /* Fundo transparente */
+  color: #808080; /* Texto cinza */
+  font-size: 1rem; /* Tamanho da fonte do botão */
+  cursor: pointer; /* Cursor de mão no hover */
+  border-radius: 0; /* Cantos retos combinando com o design */
+}
+
+.theme-toggle:hover {
+  color: #fff; /* Texto branco no hover */
+  border-color: #fff; /* Borda branca no hover */
+}
+
+body.light-mode {
+  background-color: #f6f6f6; /* Fundo claro para o modo claro */
+  color: #141414; /* Texto escuro para modo claro */
+}
+
+body.light-mode header h1 {
+  color: #141414; /* Título escuro no modo claro */
+}
+
+body.light-mode .profile-name {
+  color: #606060; /* Nome dos perfis mais suave no modo claro */
+}
+
+body.light-mode .profile a:hover .profile-name {
+  color: #141414; /* Nome em hover escuro no modo claro */
+}
+
+body.light-mode .theme-toggle {
+  color: #141414; /* Texto do botão escuro no modo claro */
+  border-color: #141414; /* Borda escura no modo claro */
+}
+
+body.light-mode .theme-toggle:hover {
+  color: #fff; /* Texto branco no hover do botão */
+  background-color: #141414; /* Fundo escuro no hover do botão no modo claro */
+}
+
+body.light-mode .btn-manage {
+  color: #141414; /* Texto do botão no modo claro */
+  border-color: #141414; /* Borda do botão no modo claro */
+}
+
+body.light-mode .btn-manage:hover {
+  color: #fff; /* Texto branco no hover do botão */
+  border-color: #141414; /* Borda escura no hover do botão */
+}
+
+body.light-mode .profile a:hover .avatar-wrapper {
+  border-color: #141414; /* Borda escura no hover do avatar no modo claro */
+}
