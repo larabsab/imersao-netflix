@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="https://capsule-render.vercel.app/render?type=waving&color=e50914&height=200&section=header&text=Imersão%20Netflix&fontSize=80&animation=fadeIn&fontAlignY=35" width="100%" />
+    <h1>🎬 IMERSÃO FRONT-END ALURA</h1>
+    <br>
 
   <p align="center">
     <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5" />
