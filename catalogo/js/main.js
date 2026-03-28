@@ -1,4 +1,4 @@
-import { categories } from './data.js';
+import { categories, profileCategoryItems } from './data.js';
 import { createCarousel } from './components/Carousel.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -14,11 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const container = document.getElementById('main-content');
+    const categoriesToShow = getCategoriesForProfile(nomePerfil);
     
     if (container) {
-        categories.forEach(category => {
+        categoriesToShow.forEach(category => {
             const carousel = createCarousel(category);
             container.appendChild(carousel);
         });
     }
 });
+
+function getCategoriesForProfile(profileName) {
+    if (!profileName || !profileCategoryItems[profileName]) {
+        return categories;
+    }
+
+    return categories.map(category => {
+        const profileItems = profileCategoryItems[profileName][category.title];
+        return {
+            ...category,
+            items: Array.isArray(profileItems) && profileItems.length > 0 ? profileItems : category.items,
+        };
+    });
+}

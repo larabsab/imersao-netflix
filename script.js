@@ -30,3 +30,19 @@ if (themeToggle) {
     saveTheme(newTheme);
   });
 }
+
+const profileLinks = document.querySelectorAll('.profile a');
+if (profileLinks.length) {
+  profileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      const avatarImg = link.querySelector('.avatar-wrapper img');
+      const profileName = link.querySelector('.profile-name');
+      if (!avatarImg || !profileName) return;
+
+      const src = avatarImg.getAttribute('src');
+      const filename = src.substring(src.lastIndexOf('/') + 1);
+      localStorage.setItem('perfilAtivoNome', profileName.textContent.trim());
+      localStorage.setItem('perfilAtivoImagem', `../assets/${filename}`);
+    });
+  });
+}

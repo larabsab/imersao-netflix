@@ -1,9 +1,15 @@
 export function getYouTubeId(url) {
     if (!url) return "7RUA0IOfar8";
+
+    // Trata links que usam o parâmetro 'v=' (ex: youtube.com/watch?v=ID)
     if (url.includes('v=')) {
         return url.split('v=')[1].split('&')[0];
     }
-    return url.split('/').pop();
+
+    // Trata links curtos ou de embed, removendo parâmetros extras como '?si=' ou '?t='
+    // Ex: youtu.be/ID?si=... ou youtube.com/embed/ID
+    const lastPart = url.split('/').pop();
+    return lastPart.split('?')[0];
 }
 
 export function getRandomMatchScore() {
