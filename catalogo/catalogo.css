@@ -442,7 +442,7 @@ a:hover {
 
 .progress-value {
     height: 100%;
-    background-color: var(--netflix-red);
+    background-color: #E50914; /* Vermelho Netflix */
     border-bottom-left-radius: 4px;
 }
 
@@ -501,3 +501,18 @@ footer {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+/* 10 anos - Azul */
+.age-badge.age-10 { background-color: #00a1f1; border: none; font-weight: bold; }
+
+/* 12 anos - Amarelo */
+.age-badge.age-12 { background-color: #f6c100; border: none; font-weight: bold; color: black; }
+
+/* 14 anos - Laranja */
+.age-badge.age-14 { background-color: #f26522; border: none; font-weight: bold; }
+
+/* 16 anos - Vermelho (Já existente como red-accent) */
+.age-badge.age-16, .age-badge.red-accent { background-color: #d32f2f; border: none; font-weight: bold; }
+
+/* 18 anos - Preto */
+.age-badge.age-18 { background-color: #000000; border: 1px solid #555; font-weight: bold; }

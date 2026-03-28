@@ -20,10 +20,26 @@ export function createCard(item) {
     card.appendChild(iframe);
     card.appendChild(img);
 
-    const ageBadge = getRandomAgeBadge();
+    const getAgeClass = (age) => {
+        if (!age) return '';
+        const cleanAge = age.replace('A', ''); // Remove o 'A' se houver (ex: A18 -> 18)
+        return `age-${cleanAge}`;
+    };
+
+    const ageText = item.idade || getRandomAgeBadge().text;
+    const ageClass = item.idade ? getAgeClass(item.idade) : getRandomAgeBadge().class;
 
     const details = document.createElement('div');
     details.className = 'card-details';
+    
+    // Ajuste: Prioriza tags, relevância e duração do objeto 'item' (data.js)
+    const tagsHTML = item.tags 
+        ? item.tags.map(tag => `<span>${tag}</span>`).join('') 
+        : `<span>Empolgante</span><span>Animação</span><span>Ficção</span>`;
+
+    const matchScore = item.relevancia || getRandomMatchScore();
+    const duration = item.duracao || getRandomDuration(item.progress);
+
     details.innerHTML = `
         <div class="details-buttons">
             <div class="left-buttons">
@@ -36,19 +52,16 @@ export function createCard(item) {
             </div>
         </div>
         <div class="details-info">
-            <span class="match-score">${getRandomMatchScore()}% relevante</span>
-            <span class="age-badge ${ageBadge.class}">${ageBadge.text}</span>
-            <span class="duration">${getRandomDuration(item.progress)}</span>
+            <span class="match-score">${matchScore}% relevante</span>
+            <span class="age-badge ${ageClass}">${ageText}</span>
+            <span class="duration">${duration}</span>
             <span class="resolution">HD</span>
         </div>
         <div class="details-tags">
-            <span>Empolgante</span>
-            <span>Animação</span>
-            <span>Ficção</span>
+            ${tagsHTML}
         </div>
     `;
     card.appendChild(details);
-
 
     if (item.progress) {
         const pbContainer = document.createElement('div');
@@ -59,7 +72,6 @@ export function createCard(item) {
         pbContainer.appendChild(pbValue);
         card.appendChild(pbContainer);
     }
-
     let playTimeout;
     card.addEventListener('mouseenter', () => {
         const rect = card.getBoundingClientRect();
@@ -72,7 +84,8 @@ export function createCard(item) {
         }
 
         playTimeout = setTimeout(() => {
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}`;
+            const cleanId = videoId.trim(); 
+            iframe.src = `https://www.youtube.com/embed/${cleanId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${cleanId}`;
             iframe.classList.add('playing');
             img.classList.add('playing-video');
         }, 600);
