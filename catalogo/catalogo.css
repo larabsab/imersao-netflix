@@ -516,3 +516,6 @@ footer {
 
 /* 18 anos - Preto */
 .age-badge.age-18 { background-color: #000000; border: 1px solid #555; font-weight: bold; }
+
+/* Livre - Verde */
+.age-badge.age-L { background-color: #4caf50; border: none; font-weight: bold; }
