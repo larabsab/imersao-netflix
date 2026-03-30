@@ -1,3 +1,5 @@
+// Dados que representam as categorias e o conteúdo exibido nos sliders.
+// Cada categoria possui um título e uma lista de itens com capa, vídeo e informações.
 export const categories = [
     {
         title: "Assistindo",

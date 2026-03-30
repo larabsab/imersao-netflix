@@ -1,5 +1,6 @@
 import { getYouTubeId, getRandomMatchScore, getRandomDuration, getRandomAgeBadge } from '../utils.js';
 
+// Cria o card visual de cada filme/série, incluindo imagem, detalhes e vídeo de preview.
 export function createCard(item) {
     const card = document.createElement('div');
     card.className = 'movie-card';

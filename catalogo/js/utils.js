@@ -1,3 +1,4 @@
+// Funções de utilidade usadas por várias partes do catálogo
 export function getYouTubeId(url) {
     if (!url) return "7RUA0IOfar8";
 
@@ -13,13 +14,16 @@ export function getYouTubeId(url) {
 }
 
 export function getRandomMatchScore() {
+    // Gera uma nota de relevância entre 80 e 99
     return Math.floor(Math.random() * 20 + 80);
 }
 
 export function getRandomDuration(hasProgress) {
+    // Retorna uma duração simulada para exibição no card
     return hasProgress ? '10 temporadas' : '2h ' + Math.floor(Math.random() * 59) + 'm';
 }
 
 export function getRandomAgeBadge() {
+    // Retorna um selo de classificação indicativa aleatório
     return Math.random() > 0.5 ? { text: 'A16', class: 'red-accent' } : { text: '16', class: '' };
 }
